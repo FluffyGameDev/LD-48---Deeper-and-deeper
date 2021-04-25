@@ -26,7 +26,7 @@ public class UIMoneyCount : MonoBehaviour
 
     void RefreshCount(uint count)
     {
-        CountTextField.text = count.ToString() + "$";
+        CountTextField.text = count.ToString();
 
         int diff = (int)count - (int)m_PreviousCount;
         if (diff != 0)
