@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b86bceec36f74418eaa55225a1d622, type: 3}
+  m_Name: ToolStrengthUpgrade
+  m_EditorClassIdentifier: 
+  UpgradeTiers:
+  - UpgradeName: Drill Strength + 1
+    UpgradeImage: {fileID: 0}
+    UpgradePrice: 5
+    StatModifier: 0
+  - UpgradeName: Drill Strength + 2
+    UpgradeImage: {fileID: 0}
+    UpgradePrice: 10
+    StatModifier: 1
+  - UpgradeName: Drill Strength + 3
+    UpgradeImage: {fileID: 0}
+    UpgradePrice: 20
+    StatModifier: 2
+  - UpgradeName: Drill Strength + 4
+    UpgradeImage: {fileID: 0}
+    UpgradePrice: 50
+    StatModifier: 3
+  - UpgradeName: Drill Strength + 5
+    UpgradeImage: {fileID: 0}
+    UpgradePrice: 200
+    StatModifier: 4
