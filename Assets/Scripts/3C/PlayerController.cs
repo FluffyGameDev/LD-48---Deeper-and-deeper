@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
     private AudioClip DeathClip;
     [SerializeField]
     private AudioClip DrillClip;
+    [SerializeField]
+    private AudioClip MoneyClip;
 
     private Wallet m_Wallet;
     private StatHolder m_StatHolder;
@@ -182,6 +184,12 @@ public class PlayerController : MonoBehaviour
                 if (IsAboveSurface())
                 {
                     ResetLadderCount();
+
+                    if (m_CollectedValue > 0)
+                    {
+                        m_AudioSource.clip = MoneyClip;
+                        m_AudioSource.Play();
+                    }
                     m_Wallet.Money += (uint)(m_CollectedValue * m_StatHolder.GetUpgradeStatModifier(MoneyMultiplierUpgrade));
                     m_CollectedValue = 0;
 

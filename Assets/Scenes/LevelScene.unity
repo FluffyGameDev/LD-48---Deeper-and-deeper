@@ -2791,8 +2791,9 @@ MonoBehaviour:
   m_TargetPosition: {x: 0, y: 0}
   m_StartPosition: {x: 0, y: 0}
   DefaultDeathDuration: 1
-  DeathClip: {fileID: 8300000, guid: a60d009c659ba1c48a6e99c16c0a82c3, type: 3}
-  DrillClip: {fileID: 8300000, guid: 62a0fc73624b08246a709d64a617c3ad, type: 3}
+  DeathClip: {fileID: 8300000, guid: a418a50c8addeeb49a04e77897e3140c, type: 3}
+  DrillClip: {fileID: 8300000, guid: 0e7743f2815eb7240b9ac6d4bc4af1e0, type: 3}
+  MoneyClip: {fileID: 8300000, guid: 0fec869d496a4014ca6f48d382af67e5, type: 3}
 --- !u!212 &1924051612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7673,7 +7674,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a60d009c659ba1c48a6e99c16c0a82c3, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
