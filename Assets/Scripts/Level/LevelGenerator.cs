@@ -22,6 +22,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private LevelGeneratorTileConfig UnbreakableTileConfig;
     [SerializeField]
+    private LevelGeneratorTileConfig TreasureTileConfig;
+    [SerializeField]
     private uint LevelWidth = 10;
     [SerializeField]
     private uint LevelHeight = 10;
@@ -59,6 +61,9 @@ public class LevelGenerator : MonoBehaviour
             block[yOffset] = UnbreakableTileConfig.Tile;
             block[yOffset + LevelWidth + 1] = UnbreakableTileConfig.Tile;
         }
+
+        const int treasureDistanceFromBottom = 5;
+        block[realWidth * treasureDistanceFromBottom + m_Random.Next((int)LevelWidth) + 1] = TreasureTileConfig.Tile;
 
         BoundsInt bounds = new BoundsInt(-(int)realWidth / 2, -(int)LevelHeight, 0, (int)realWidth, (int)realHeight, 1);
 

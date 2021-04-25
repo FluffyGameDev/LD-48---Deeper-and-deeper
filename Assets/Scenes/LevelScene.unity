@@ -2258,6 +2258,11 @@ MonoBehaviour:
     MinY: 0
     MaxY: 4294967295
     Weight: 1
+  TreasureTileConfig:
+    Tile: {fileID: 11400000, guid: 316191382c5ac4945b37985b45c15f5b, type: 2}
+    MinY: 0
+    MaxY: 4294967295
+    Weight: 1
   LevelWidth: 40
   LevelHeight: 160
 --- !u!1 &1924051610
