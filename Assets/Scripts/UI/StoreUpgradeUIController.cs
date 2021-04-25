@@ -72,7 +72,15 @@ public class StoreUpgradeUIController : MonoBehaviour
             PlayerWallet.Money -= tier.UpgradePrice;
             stats.IncreaseTier(m_Upgrade);
 
-            RefreshUI();
+
+            foreach (Transform upgradeTransform in transform.parent)
+            {
+                StoreUpgradeUIController upgrade = upgradeTransform.GetComponent<StoreUpgradeUIController>();
+                if (upgrade != null)
+                {
+                    upgrade.RefreshUI();
+                }
+            }
         }
     }
 }
