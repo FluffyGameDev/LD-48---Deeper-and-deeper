@@ -23,11 +23,11 @@ MonoBehaviour:
     StatModifier: 1
   - UpgradeName: Drill Strength + 3
     UpgradeImage: {fileID: 0}
-    UpgradePrice: 20
+    UpgradePrice: 50
     StatModifier: 2
   - UpgradeName: Drill Strength + 4
     UpgradeImage: {fileID: 0}
-    UpgradePrice: 50
+    UpgradePrice: 200
     StatModifier: 3
   - UpgradeName: Drill Strength + 5
     UpgradeImage: {fileID: 0}

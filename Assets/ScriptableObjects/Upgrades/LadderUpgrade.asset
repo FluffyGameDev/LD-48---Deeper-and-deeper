@@ -23,13 +23,13 @@ MonoBehaviour:
     StatModifier: 10
   - UpgradeName: Always more ladders
     UpgradeImage: {fileID: 0}
-    UpgradePrice: 20
+    UpgradePrice: 50
     StatModifier: 30
   - UpgradeName: Ladder Collector
     UpgradeImage: {fileID: 0}
-    UpgradePrice: 50
+    UpgradePrice: 200
     StatModifier: 70
   - UpgradeName: Ladder Monopolist
     UpgradeImage: {fileID: 0}
-    UpgradePrice: 200
+    UpgradePrice: 0
     StatModifier: 150
