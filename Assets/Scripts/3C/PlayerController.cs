@@ -56,8 +56,15 @@ public class PlayerController : MonoBehaviour
     private float m_DrillStartTime;
     private bool m_IsDrilling;
 
+    [SerializeField]
+    private float DefaultDeathDuration = 1.0f;
+    private float m_DeathStartTime = 0.0f;
+    private bool m_IsDying = false;
+
     private Wallet m_Wallet;
     private StatHolder m_StatHolder;
+    private AudioSource m_AudioSource;
+    private ParticleSystem m_ParticleSystem;
     private uint m_CollectedValue = 0;
     private bool m_FoundTreasure = false;
 
@@ -65,6 +72,8 @@ public class PlayerController : MonoBehaviour
     {
         m_Wallet = GetComponent<Wallet>();
         m_StatHolder = GetComponent<StatHolder>();
+        m_AudioSource = GetComponent<AudioSource>();
+        m_ParticleSystem = GetComponent<ParticleSystem>();
 
         PlayerChannel.OnMovementEnabled += OnMovementEnabled;
     }
@@ -85,7 +94,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (m_IsDrilling)
+        if (m_IsDying)
+        {
+            if (Time.time >= m_DeathStartTime + DefaultDeathDuration)
+            {
+                GetComponent<Renderer>().enabled = true;
+                ResetSelf();
+                m_IsDying = false;
+            }
+        }
+        else if (m_IsDrilling)
         {
             if (Time.time >= m_DrillStartTime + DefaultDrillSpeed + m_StatHolder.GetUpgradeStatModifier(DrillSpeedUpgrade))
             {
@@ -133,7 +151,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (Input.GetKey(KeyCode.R))
                 {
-                    DestroySelf();
+                    StartDestroy();
                 }
             }
         }
@@ -153,7 +171,7 @@ public class PlayerController : MonoBehaviour
 
                 if (m_FallDistance > FallHeightResistance + m_StatHolder.GetUpgradeStatModifierAsInt(FallResistanceUpgrade))
                 {
-                    DestroySelf();
+                    StartDestroy();
                 }
 
                 if (IsAboveSurface())
@@ -253,7 +271,7 @@ public class PlayerController : MonoBehaviour
         Vector2 diff = m_DrillPosition - transform.position;
         StartMovement((int)diff.x, (int)diff.y);
 
-        //TODO: particles
+        //TODO: particles + sound
     }
 
     private bool CanDrillTile(GroundTile tile)
@@ -261,10 +279,17 @@ public class PlayerController : MonoBehaviour
         return (DefaultDrillStrength + (uint)m_StatHolder.GetUpgradeStatModifierAsInt(DrillStrengthUpgrade)) >= tile.TileData.DrillResistance;
     }
 
-    private void DestroySelf()
+    private void StartDestroy()
     {
-        //TODO: particles
+        GetComponent<Renderer>().enabled = false;
+        m_DeathStartTime = Time.time;
+        m_IsDying = true;
+        m_ParticleSystem.Play();
+        m_AudioSource.Play();
+    }
 
+    private void ResetSelf()
+    {
         m_CurrentPosition = FindRespawnPosition();
         m_TargetPosition = m_CurrentPosition;
         m_StartMoveTime = 0.0f;
@@ -294,7 +319,7 @@ public class PlayerController : MonoBehaviour
         {
             if (GetTileAtPosition(new Vector3(i, -1.0f, 0.0f) + PositionOffset) != null)
             {
-                respawnPosition = new Vector2Int(i, -1);
+                respawnPosition = new Vector2Int(i, 0);
                 break;
             }
             if (GetTileAtPosition(new Vector3(-i, -1.0f, 0.0f)) != null)
