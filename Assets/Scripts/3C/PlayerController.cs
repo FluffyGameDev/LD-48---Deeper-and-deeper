@@ -306,7 +306,12 @@ public class PlayerController : MonoBehaviour
         GroundTile tile = GetTileAtPosition(m_DrillPosition);
         m_CollectedValue += tile.TileData.Value;
         Ground.SetTile(Ground.WorldToCell(m_DrillPosition), null);
-        m_FoundTreasure |= (tile == TreasureTile);
+
+        if (tile == TreasureTile)
+        {
+            m_FoundTreasure = true;
+            PlayerChannel.RaiseFoundTreasure();
+        }
 
         Vector2 diff = m_DrillPosition - transform.position;
         StartMovement((int)diff.x, (int)diff.y);

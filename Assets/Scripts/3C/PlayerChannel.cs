@@ -16,8 +16,10 @@ public class PlayerChannel : ScriptableObject
     public delegate void GameCompletedCallback();
     public GameCompletedCallback OnGameCompleted;
 
-    public delegate void LostTreasureCallback();
-    public LostTreasureCallback OnLostTreasure;
+    public delegate void TreasureCallback();
+    public TreasureCallback OnLostTreasure;
+    public TreasureCallback OnFoundTreasure;
+
     public void RaiseLadderCountChanged(uint count)
     {
         OnLadderCountChanged?.Invoke(count);
@@ -46,5 +48,10 @@ public class PlayerChannel : ScriptableObject
     public void RaiseLostTreasure()
     {
         OnLostTreasure?.Invoke();
+    }
+
+    public void RaiseFoundTreasure()
+    {
+        OnFoundTreasure?.Invoke();
     }
 }
