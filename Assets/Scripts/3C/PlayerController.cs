@@ -327,7 +327,7 @@ public class PlayerController : MonoBehaviour
         return (DefaultDrillStrength + (uint)m_StatHolder.GetUpgradeStatModifierAsInt(DrillStrengthUpgrade)) >= tile.TileData.DrillResistance;
     }
 
-    private void StartDestroy()
+    public void StartDestroy()
     {
         GetComponent<Renderer>().enabled = false;
         m_DeathStartTime = Time.time;
