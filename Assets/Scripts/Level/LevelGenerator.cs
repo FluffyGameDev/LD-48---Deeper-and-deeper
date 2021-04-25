@@ -27,9 +27,21 @@ public class LevelGenerator : MonoBehaviour
     private uint LevelWidth = 10;
     [SerializeField]
     private uint LevelHeight = 10;
+    [SerializeField]
+    private PlayerChannel PlayerChannel;
 
     private Tilemap m_TileMap;
     private readonly System.Random m_Random = new System.Random();
+
+    private void Awake()
+    {
+        PlayerChannel.OnLostTreasure += SpawnTreasure;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerChannel.OnLostTreasure -= SpawnTreasure;
+    }
 
     private void Start()
     {
@@ -62,14 +74,23 @@ public class LevelGenerator : MonoBehaviour
             block[yOffset + LevelWidth + 1] = UnbreakableTileConfig.Tile;
         }
 
-        const int treasureDistanceFromBottom = 5;
-        block[realWidth * treasureDistanceFromBottom + m_Random.Next((int)LevelWidth) + 1] = TreasureTileConfig.Tile;
-
         BoundsInt bounds = new BoundsInt(-(int)realWidth / 2, -(int)LevelHeight, 0, (int)realWidth, (int)realHeight, 1);
 
         m_TileMap.SetTilesBlock(bounds, block);
+        
+        SpawnTreasure();
 
         yield return null;
+    }
+
+    private void SpawnTreasure()
+    {
+        Vector3 treasureCoord = new Vector3(
+            m_Random.Next((int)LevelWidth) - LevelWidth / 2,
+            -m_Random.Next((int)TreasureTileConfig.MinY, (int)TreasureTileConfig.MaxY),
+            0.0f);
+
+        m_TileMap.SetTile(m_TileMap.WorldToCell(treasureCoord), TreasureTileConfig.Tile);
     }
 
     private void FindPossibleTiles(uint y, List<LevelGeneratorTileConfig> list)

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 PositionOffset;
     [SerializeField]
     private GroundTile LadderTile;
+    [SerializeField]
+    private GroundTile TreasureTile;
     [SerializeField]
     private Tilemap Ground;
     [SerializeField]
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     private Wallet m_Wallet;
     private StatHolder m_StatHolder;
     private uint m_CollectedValue = 0;
+    private bool m_FoundTreasure = false;
 
     private void Awake()
     {
@@ -150,7 +151,7 @@ public class PlayerController : MonoBehaviour
                 m_CurrentPosition = m_TargetPosition;
                 m_IsMoving = false;
 
-                if (m_FallDistance > FallHeightResistance) //TODO Stat: Fall resistance
+                if (m_FallDistance > FallHeightResistance + m_StatHolder.GetUpgradeStatModifierAsInt(FallResistanceUpgrade))
                 {
                     DestroySelf();
                 }
@@ -158,11 +159,20 @@ public class PlayerController : MonoBehaviour
                 if (IsAboveSurface())
                 {
                     ResetLadderCount();
-                    m_Wallet.Money += m_CollectedValue; //TODO Stat: Money multiplier ?
+                    m_Wallet.Money += (uint)(m_CollectedValue * m_StatHolder.GetUpgradeStatModifier(MoneyMultiplierUpgrade));
                     m_CollectedValue = 0;
+
+                    if (m_FoundTreasure)
+                    {
+                        PlayerChannel.RaiseGameCompleted();
+                        PlayerChannel.RaiseMovementEnabled(false);
+                        m_FoundTreasure = false;
+                    }
                 }
 
                 m_FallDistance = 0;
+
+                PlayerChannel.RaisePositionChanged(m_CurrentPosition);
             }
             else
             {
@@ -238,6 +248,7 @@ public class PlayerController : MonoBehaviour
         GroundTile tile = GetTileAtPosition(m_DrillPosition);
         m_CollectedValue += tile.TileData.Value;
         Ground.SetTile(Ground.WorldToCell(m_DrillPosition), null);
+        m_FoundTreasure |= (tile == TreasureTile);
 
         Vector2 diff = m_DrillPosition - transform.position;
         StartMovement((int)diff.x, (int)diff.y);
@@ -260,6 +271,13 @@ public class PlayerController : MonoBehaviour
         m_IsMoving = false;
         m_FallDistance = 0;
         m_CollectedValue = 0;
+
+        if (m_FoundTreasure)
+        {
+            m_FoundTreasure = false;
+            PlayerChannel.RaiseLostTreasure();
+        }
+
         ResetLadderCount();
 
         Vector3 worldPosition = new Vector3(m_CurrentPosition.x, m_CurrentPosition.y);
