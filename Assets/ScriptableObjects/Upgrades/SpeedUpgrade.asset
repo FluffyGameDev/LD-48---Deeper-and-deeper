@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpgradeTiers:
   - UpgradeName: Slow Walker
-    UpgradeImage: {fileID: 0}
+    UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 5
     StatModifier: 0
   - UpgradeName: Fast Walker
-    UpgradeImage: {fileID: 0}
+    UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 10
     StatModifier: -0.05
   - UpgradeName: Runner
-    UpgradeImage: {fileID: 0}
+    UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 50
     StatModifier: -0.1
   - UpgradeName: Sprinter
-    UpgradeImage: {fileID: 0}
+    UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 200
     StatModifier: -0.15
   - UpgradeName: Can catch up a bus
-    UpgradeImage: {fileID: 0}
+    UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 0
     StatModifier: -0.2
