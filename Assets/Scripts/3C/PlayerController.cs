@@ -194,6 +194,7 @@ public class PlayerController : MonoBehaviour
                     }
                     m_Wallet.Money += (uint)(m_CollectedValue * m_StatHolder.GetUpgradeStatModifier(MoneyMultiplierUpgrade));
                     m_CollectedValue = 0;
+                    PlayerChannel.RaisePendingMoneyCountChanged(m_CollectedValue);
 
                     if (m_FoundTreasure)
                     {
@@ -307,6 +308,8 @@ public class PlayerController : MonoBehaviour
         m_CollectedValue += tile.TileData.Value;
         Ground.SetTile(Ground.WorldToCell(m_DrillPosition), null);
 
+        PlayerChannel.RaisePendingMoneyCountChanged(m_CollectedValue);
+
         if (tile == TreasureTile)
         {
             m_FoundTreasure = true;
@@ -343,6 +346,7 @@ public class PlayerController : MonoBehaviour
         m_IsMoving = false;
         m_FallDistance = 0;
         m_CollectedValue = 0;
+        PlayerChannel.RaisePendingMoneyCountChanged(m_CollectedValue);
 
         if (m_FoundTreasure)
         {

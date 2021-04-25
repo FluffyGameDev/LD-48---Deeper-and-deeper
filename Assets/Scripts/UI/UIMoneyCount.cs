@@ -6,6 +6,8 @@ public class UIMoneyCount : MonoBehaviour
     [SerializeField]
     private Text CountTextField;
     [SerializeField]
+    private Text PendingCountTextField;
+    [SerializeField]
     private PlayerChannel PlayerChannel;
     [SerializeField]
     private Transform EarningsSpawnTransform;
@@ -17,10 +19,12 @@ public class UIMoneyCount : MonoBehaviour
     void Awake()
     {
         PlayerChannel.OnMoneyCountChanged += RefreshCount;
+        PlayerChannel.OnPendingMoneyCountChanged += RefreshPending;
     }
 
     void OnDestroy()
     {
+        PlayerChannel.OnPendingMoneyCountChanged -= RefreshPending;
         PlayerChannel.OnMoneyCountChanged -= RefreshCount;
     }
 
@@ -36,5 +40,11 @@ public class UIMoneyCount : MonoBehaviour
         }
 
         m_PreviousCount = count;
+    }
+
+    void RefreshPending(uint count)
+    {
+        PendingCountTextField.gameObject.SetActive(count > 0);
+        PendingCountTextField.text = "+" + count.ToString();
     }
 }

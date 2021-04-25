@@ -6,6 +6,7 @@ public class PlayerChannel : ScriptableObject
     public delegate void ResourceCountChangedCallback(uint count);
     public ResourceCountChangedCallback OnLadderCountChanged;
     public ResourceCountChangedCallback OnMoneyCountChanged;
+    public ResourceCountChangedCallback OnPendingMoneyCountChanged;
 
     public delegate void MovementEnabledCallback(bool enabled);
     public MovementEnabledCallback OnMovementEnabled;
@@ -28,6 +29,11 @@ public class PlayerChannel : ScriptableObject
     public void RaiseMoneyCountChanged(uint count)
     {
         OnMoneyCountChanged?.Invoke(count);
+    }
+
+    public void RaisePendingMoneyCountChanged(uint count)
+    {
+        OnPendingMoneyCountChanged?.Invoke(count);
     }
 
     public void RaiseMovementEnabled(bool enabled)
