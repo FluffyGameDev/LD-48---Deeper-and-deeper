@@ -2982,7 +2982,6 @@ GameObject:
   - component: {fileID: 1606678845}
   - component: {fileID: 1606678844}
   - component: {fileID: 1606678843}
-  - component: {fileID: 1606678842}
   m_Layer: 5
   m_Name: SelfDestructButton
   m_TagString: Untagged
@@ -3010,19 +3009,6 @@ RectTransform:
   m_AnchoredPosition: {x: -400, y: 0}
   m_SizeDelta: {x: 163.0475, y: 67.602}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1606678842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606678840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f9ae007a4ee6404daf26dafd0e49921, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerChannel: {fileID: 11400000, guid: 99709e1360d1bdd48babe10d4c8d8034, type: 2}
 --- !u!114 &1606678843
 MonoBehaviour:
   m_ObjectHideFlags: 0
