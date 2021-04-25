@@ -61,6 +61,11 @@ public class PlayerController : MonoBehaviour
     private float m_DeathStartTime = 0.0f;
     private bool m_IsDying = false;
 
+    [SerializeField]
+    private AudioClip DeathClip;
+    [SerializeField]
+    private AudioClip DrillClip;
+
     private Wallet m_Wallet;
     private StatHolder m_StatHolder;
     private AudioSource m_AudioSource;
@@ -258,6 +263,9 @@ public class PlayerController : MonoBehaviour
         m_IsDrilling = true;
         m_DrillPosition = position;
         m_DrillStartTime = Time.time;
+
+        m_AudioSource.clip = DrillClip;
+        m_AudioSource.Play();
     }
 
     private void EndDrillAnimation()
@@ -285,6 +293,8 @@ public class PlayerController : MonoBehaviour
         m_DeathStartTime = Time.time;
         m_IsDying = true;
         m_ParticleSystem.Play();
+
+        m_AudioSource.clip = DeathClip;
         m_AudioSource.Play();
     }
 

@@ -47,5 +47,9 @@ public class FlowManager : MonoBehaviour
     private void RequestFlowState(FlowState state)
     {
         CurrentState = state;
+        if (CurrentState == null)
+        {
+            Application.Quit();
+        }
     }
 }
