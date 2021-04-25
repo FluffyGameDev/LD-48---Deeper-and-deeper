@@ -24,9 +24,9 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]
     private LevelGeneratorTileConfig TreasureTileConfig;
     [SerializeField]
-    private uint LevelWidth = 10;
+    public uint LevelWidth = 10;
     [SerializeField]
-    private uint LevelHeight = 10;
+    public uint LevelHeight = 10;
     [SerializeField]
     private PlayerChannel PlayerChannel;
 

@@ -286,8 +286,24 @@ public class PlayerController : MonoBehaviour
 
     Vector2Int FindRespawnPosition()
     {
-        //TODO: find safe position
-        return m_StartPosition;
+        Vector2Int respawnPosition = m_StartPosition;
+
+        LevelGenerator levelGenerator = Ground.GetComponent<LevelGenerator>();
+        int halfWidth = (int)levelGenerator.LevelWidth / 2;
+        for (int i = 0; i < halfWidth; ++i)
+        {
+            if (GetTileAtPosition(new Vector3(i, -1.0f, 0.0f) + PositionOffset) != null)
+            {
+                respawnPosition = new Vector2Int(i, -1);
+                break;
+            }
+            if (GetTileAtPosition(new Vector3(-i, -1.0f, 0.0f)) != null)
+            {
+                respawnPosition = new Vector2Int(-i, 0);
+                break;
+            }
+        }
+        return respawnPosition;
     }
 
     private void ResetLadderCount()

@@ -957,7 +957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowTarget: {fileID: 1924051613}
   Offset: {x: 0, y: 0, z: -10}
-  FollowSpeed: 1.5
+  FollowSpeed: 5
 --- !u!1 &245181327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2842,6 +2842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerChannel: {fileID: 11400000, guid: 99709e1360d1bdd48babe10d4c8d8034, type: 2}
+  m_Money: 0
 --- !u!114 &1924051615
 MonoBehaviour:
   m_ObjectHideFlags: 0

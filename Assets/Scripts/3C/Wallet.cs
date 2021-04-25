@@ -5,6 +5,7 @@ public class Wallet : MonoBehaviour
     [SerializeField]
     private PlayerChannel PlayerChannel;
 
+    [SerializeField]
     private uint m_Money = 0;
     public uint Money
     {
