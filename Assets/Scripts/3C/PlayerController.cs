@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private uint DefaultDrillStrength = 1;
     [SerializeField]
     private float DefaultDrillSpeed = 0.5f;
+    [SerializeField]
+    private GameObject DrillObject;
 
     [SerializeField]
     private UpgradeData SpeedUpgrade;
@@ -274,10 +276,32 @@ public class PlayerController : MonoBehaviour
 
         m_AudioSource.clip = DrillClip;
         m_AudioSource.Play();
+
+
+        Vector2 diff = m_DrillPosition - transform.position;
+        if (diff.x < 0)
+        {
+            DrillObject.transform.localEulerAngles = new Vector3(0, 0, 270);
+        }
+        else if (diff.x > 0)
+        {
+            DrillObject.transform.localEulerAngles = new Vector3(0, 0, 90);
+        }
+        else if (diff.y < 0)
+        {
+            DrillObject.transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (diff.y > 0)
+        {
+            DrillObject.transform.localEulerAngles = new Vector3(0, 0, 180);
+        }
+        DrillObject.SetActive(true);
     }
 
     private void EndDrillAnimation()
     {
+        DrillObject.SetActive(false);
+
         m_IsDrilling = false;
         GroundTile tile = GetTileAtPosition(m_DrillPosition);
         m_CollectedValue += tile.TileData.Value;
