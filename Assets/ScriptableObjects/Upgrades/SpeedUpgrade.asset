@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SpeedUpgrade
   m_EditorClassIdentifier: 
   UpgradeTiers:
-  - UpgradeName: Slow Walker
+  - UpgradeName: Fast Walker
     UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 5
     StatModifier: 0
-  - UpgradeName: Fast Walker
+  - UpgradeName: Faster Walker
     UpgradeImage: {fileID: 8897200002693046300, guid: a248979a3058f6640a7e65225eab40b6, type: 3}
     UpgradePrice: 10
     StatModifier: -0.05
