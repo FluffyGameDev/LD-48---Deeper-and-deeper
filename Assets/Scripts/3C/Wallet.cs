@@ -4,6 +4,8 @@ public class Wallet : MonoBehaviour
 {
     [SerializeField]
     private PlayerChannel PlayerChannel;
+    [SerializeField]
+    private StatData MoneyStat;
 
     [SerializeField]
     private uint m_Money = 0;
@@ -16,6 +18,8 @@ public class Wallet : MonoBehaviour
             {
                 m_Money = value;
                 PlayerChannel.OnMoneyCountChanged(m_Money);
+
+                GetComponent<StatHolder>().SetStat(MoneyStat, m_Money);
             }
         }
     }

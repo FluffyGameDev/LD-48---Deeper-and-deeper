@@ -70,6 +70,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AudioClip MoneyClip;
 
+    [SerializeField]
+    private StatData DeathStat;
+
     private Wallet m_Wallet;
     private StatHolder m_StatHolder;
     private AudioSource m_AudioSource;
@@ -193,6 +196,7 @@ public class PlayerController : MonoBehaviour
                         m_AudioSource.Play();
                     }
                     m_Wallet.Money += (uint)(m_CollectedValue * m_StatHolder.GetUpgradeStatModifier(MoneyMultiplierUpgrade));
+
                     m_CollectedValue = 0;
                     PlayerChannel.RaisePendingMoneyCountChanged(m_CollectedValue);
 
@@ -336,6 +340,8 @@ public class PlayerController : MonoBehaviour
 
         m_AudioSource.clip = DeathClip;
         m_AudioSource.Play();
+
+        m_StatHolder.IncrementStat(DeathStat);
     }
 
     private void ResetSelf()
